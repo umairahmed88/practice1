@@ -4,7 +4,8 @@ import {CardList} from './components/card-list/card-list.components'
 
 import {SearchBox} from './components/search-box/search-box.component'
 
-import './App.css';
+import { GlobalStyle } from './global.styles'
+// import './App.css';
 
 class App extends Component {
 constructor() {
@@ -34,6 +35,7 @@ onSearchChange = e => {
 
     return (
       <div className="App">
+        <GlobalStyle />
         <h1>Monsters Rolodex</h1>
         <SearchBox onSearchChange={this.onSearchChange}/>
         <CardList practices={filteredFileds} />
