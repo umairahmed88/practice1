@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import {CardList} from './components/card-list/card-list.components'
 
+import {SearchBox} from './components/search-box/search-box.component'
+
 import './App.css';
 
 class App extends Component {
@@ -9,7 +11,8 @@ constructor() {
   super();
 
   this.state = {
-    practices: []
+    practices: [],
+    searchField: ''
   };
 }
 
@@ -20,9 +23,17 @@ componentDidMount() {
 }
 
   render() {
+    const { practices, searchField } = this.state;
+    const filteredFileds = practices.filter(practice => 
+      practice.name.toLowerCase().includes(searchField.toLowerCase()))
     return (
       <div className="App">
-        <CardList practices={this.state.practices} />
+        <h1>Monsters Rolodex</h1>
+        <SearchBox
+          placeholder='search field'
+          handleChange={e => this.setState({ searchField: e.target.value })}
+        />
+        <CardList practices={filteredFileds} />
       </div>
     );
   }
