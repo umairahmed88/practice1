@@ -22,17 +22,20 @@ componentDidMount() {
     .then(users => this.setState({ practices: users }));
 }
 
+onSearchChange = e => {
+  this.setState({searchField: e.target.value});
+};
+
   render() {
     const { practices, searchField } = this.state;
     const filteredFileds = practices.filter(practice => 
-      practice.name.toLowerCase().includes(searchField.toLowerCase()))
+      practice.name.toLowerCase().includes(searchField.toLowerCase())
+    );
+
     return (
       <div className="App">
         <h1>Monsters Rolodex</h1>
-        <SearchBox
-          placeholder='search field'
-          handleChange={e => this.setState({ searchField: e.target.value })}
-        />
+        <SearchBox onSearchChange={this.onSearchChange}/>
         <CardList practices={filteredFileds} />
       </div>
     );
